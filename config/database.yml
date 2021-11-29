@@ -1,0 +1,21 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: 33259471
+
+development:
+  <<: *default
+  database: maestrov1_ddbb
+
+test:
+  <<: *default
+  database: maestrov1_ddbb
+
+production:
+  <<: *default
+  database: maestrov1_ddbb
+  username: postgres
+  password: 33259471
