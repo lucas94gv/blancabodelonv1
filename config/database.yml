@@ -8,14 +8,14 @@ default: &default
 
 development:
   <<: *default
-  database: maestrov1_ddbb
+  database: blancabodelon_ddbb
 
 test:
   <<: *default
-  database: maestrov1_ddbb
+  database: blancabodelon_ddbb
 
 production:
   <<: *default
-  database: maestrov1_ddbb
+  database: blancabodelon_ddbb
   username: postgres
   password: 33259471
