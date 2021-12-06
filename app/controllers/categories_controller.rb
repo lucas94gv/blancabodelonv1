@@ -17,18 +17,21 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.create(category_params)
     @category.update(code: @code)
-    redirect_to categories_path, notice: "La categoría se creó correctamente."  
+    
+    if @category.errors.any?
+      redirect_to new_category_path, notice: @category.errors.first.full_message
+    else
+      redirect_to categories_path, notice: "La categoría se creó correctamente."  
+    end    
   end
 
   def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: "La categoría se actualizó correctamente." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    @category.update(category_params)
+
+    if @category.errors.any?
+      redirect_to edit_category_path, errors: @category.errors.first.full_message
+    else
+      redirect_to categories_path, notice: "La categoría se actualizó correctamente."  
     end
   end
 
@@ -43,7 +46,7 @@ class CategoriesController < ApplicationController
   private
     def set_code
       if Category.all.count == 0
-        @code = "%0.2f" % "1"
+        @code = 1
       else
         last_code = Category.last.code
         @code = last_code.to_i + 1
