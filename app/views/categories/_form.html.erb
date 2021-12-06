@@ -1,3 +1,10 @@
+<% if @category.new_record? %>
+  <h1>Nueva categoría</h1>
+  <%= Category.all.count %>
+<% else %>
+  <h1>Editar categoría</h1>
+<% end %>
+
 <%= form_with(model: category) do |form| %>
   <% if category.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +19,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :ancestry %>
-    <%= form.text_field :ancestry %>
-  </div>
-
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.number_field :code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :position %>
-    <%= form.number_field :position %>
+    <%= form.label :position, "Posición" %>
+    <%= form.number_field :position, required: true %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<%= link_to 'Volver', categories_path %>

@@ -1,12 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_code, only: %i[ create ]
 
   def index
     @categories = Category.all
-  end
-
-  def show
   end
 
   def new
@@ -17,23 +15,15 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
+    @category = Category.create(category_params)
+    @category.update(code: @code)
+    redirect_to categories_path, notice: "La categoría se creó correctamente."  
   end
 
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: "Category was successfully updated." }
+        format.html { redirect_to @category, notice: "La categoría se actualizó correctamente." }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -45,17 +35,26 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
+      format.html { redirect_to categories_url, notice: "La categoría se eliminó correctamente." }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_code
+      if Category.all.count == 0
+        @code = "%0.2f" % "1"
+      else
+        last_code = Category.last.code
+        @code = last_code.to_i + 1
+      end
+    end
+
     def set_category
       @category = Category.find(params[:id])
     end
 
     def category_params
-      params.require(:category).permit(:name, :ancestry, :code, :position)
-    end
+      params.require(:category).permit(:name, :position)
+    end    
 end
