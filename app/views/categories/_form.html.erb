@@ -4,28 +4,23 @@
       <% if @category.new_record? %>
         <span class="is-size-1">Nueva categoría</span>
       <% else %>
-        <span> class="is-size-1">Editar categoría</span>
+        <span class="is-size-1">Editar categoría</span>
       <% end %>
     </div>
   </div>
 
-  <div class="columns">
-    <%= form_with(model: category) do |form| %>
-      <div class="column">
-        <div class="columns">
-          <div class="column">
-            <div class="actions">
-              <%= form.submit %>
-            </div>
-          </div>
-          <div class="column">
-            <%= link_to 'Volver', categories_path %>
-          </div>
-        </div>        
+  
+  <%= form_with(model: category) do |form| %>
+    <div class="columns">
+      <div class="column column has-text-right">
+          <%= link_to 'Volver', categories_path, class: "button" %>          
+          <%= form.submit "Guardar", class: "button is-success" %>
       </div>
-
-      <div class="column">
-        <% if category.errors.any? %>
+    </div>
+    
+    <% if category.errors.any? %>
+      <div class="columns">
+        <div class="column">
           <div id="error_explanation">
             <ul>
               <% category.errors.each do |error| %>
@@ -33,22 +28,22 @@
               <% end %>
             </ul>
           </div>
-        <% end %>
-      </div>
-
-      <div class="column">
-        <div class="field">
-          <%= form.label :name, "Nombre" %>
-          <%= form.text_field :name, required: true %>
-        </div>
-
-        <div class="field">
-          <%= form.label :position, "Posición" %>
-          <%= form.number_field :position, required: true %>
         </div>
       </div>
-    <% end %>
-  </div>
+    <% end %>      
+
+    <div class="columns is-justify-content-center box has-background-light">
+      <div class="column is-half">
+        <div class="field">
+          <%= form.text_field :name, class: "input is-normal", placeholder: "Nombre", required: true %>
+        </div>
+        <div class="field">
+          <%= form.number_field :position, class: "input is-normal", placeholder: "Posición", required: true %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
 
   
 </div>
