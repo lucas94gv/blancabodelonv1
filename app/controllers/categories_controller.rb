@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   before_action :set_code, only: %i[ create ]
 
   def index
-    @categories = Category.all
+    @categories = Category.order(position: :asc).all
   end
 
   def new
