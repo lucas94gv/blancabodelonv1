@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  layout 'panel_admin'
+
   before_action :authenticate_user!
   before_action :set_category, only: %i[ show edit update destroy ]
   before_action :set_code, only: %i[ create ]

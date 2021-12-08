@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blanca Bodelón</title>
+    <title>Panel Admin</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+  <body class="maxWidthHeight">
+    <div class="columns por100WidthHeight">
+        <div class="column is-1 panel_admin has-background-success-dark">
+            <%= render 'layouts/admin/menu' %>
+        </div>
+        <div class="column is-11">
+            <%= yield %>
+        </div>
+    </div>
   </body>
 </html>
