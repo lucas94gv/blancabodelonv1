@@ -4,7 +4,7 @@
       <% if @category.new_record? %>
         <span class="is-size-1">Nueva categoría</span>
       <% else %>
-        <span class="is-size-1">Editar categoría - <%= @category.name %> </span>
+        <span class="is-size-1">Editar <%= @category.name %> </span>
       <% end %>      
     </div>
   </div>
@@ -43,34 +43,11 @@
       </div>
     </div>
   <% end %>
-  
-  <% if @category.subcategories.present? &&  %>
-    <div class="column has-text-centered has-text-weight-bold">
+
+  <% if category.subcategories.present? %>
+    <div class="column has-text-centered">
       <span class="is-size-3">CATEGORÍAS HIJAS</span>
-      <% if @category.subcategories.present? %>
-        <div class="columns is-multiline mt-4 is-justify-content-center">
-          <% @category.subcategories.each do |cat_child| %>
-            <div class="column box has-background-light mb-5 is-7 has-text-left">
-              <div class="columns">
-                <div class="column">
-                  <span>Nombre: <%= cat_child.name %></span>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column">
-                  <span>Posición: <%= cat_child.position %></span>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column">
-                    <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_category_path(cat_child) %>
-                    <%= link_to image_tag("icons/icon-delete.svg", size: "20x20"), cat_child, method: :delete, data: { confirm: '¿Estás seguro?' } %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render(SecondCategoryComponent.new(category: category)) %>
     </div>
   <% end %>
 </div>

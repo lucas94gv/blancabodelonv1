@@ -1,0 +1,14 @@
+<div class="columns">
+    <div class="column box has-background-light mb-5">
+        <div class="columns">
+            <div class="column">
+                <span class="is-size-4"><%= @category.name %></span>
+            </div>
+            <div class="column has-text-right">
+                <%= link_to image_tag("icons/icon-new.svg", size: "20x20"), new_category_path(cat_father: @category.id) %>
+                <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_category_path(@category) %>
+                <%= link_to image_tag("icons/icon-delete.svg", size: "20x20"), @category, method: :delete, data: { confirm: '¿Estás seguro?' } %>
+            </div>
+        </div>
+    </div>          
+</div>
