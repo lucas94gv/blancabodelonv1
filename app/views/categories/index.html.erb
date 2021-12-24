@@ -16,6 +16,7 @@
     <div class="column is-one-quarter">
        <% @categories.each do |category| %>
         <div class="columns">
+          <!-- CATEGORIA PADRE -->
           <div class="column box has-background-light mb-5">
             <div class="columns">
               <div class="column">
@@ -29,12 +30,38 @@
             </div>
             <div class="columns">
               <div class="column">
+                  <%= link_to image_tag("icons/icon-new.svg", size: "20x20"), new_category_path(cat_father: category.id) %>
                   <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_category_path(category) %>
                   <%= link_to image_tag("icons/icon-delete.svg", size: "20x20"), category, method: :delete, data: { confirm: '¿Estás seguro?' } %>
               </div>
             </div>
-          </div>
+          </div>          
         </div>
+        <!-- CATEGORIAS HIJAS -->
+        <% if category.subcategories.present? %>
+          <div class="columns level-right is-multiline">
+            <% category.subcategories.each do |cat_child| %>
+              <div class="column box has-background-light mb-5 is-11">
+                <div class="columns">
+                  <div class="column">
+                    <span>Nombre: <%= cat_child.name %></span>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <span>Posición: <%= cat_child.position %></span>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                      <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_category_path(cat_child) %>
+                      <%= link_to image_tag("icons/icon-delete.svg", size: "20x20"), cat_child, method: :delete, data: { confirm: '¿Estás seguro?' } %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
        <% end %>
     </div>
   </div>

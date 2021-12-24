@@ -4,10 +4,9 @@ class CategoriesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_category, only: %i[ show edit update destroy ]
-  before_action :set_code, only: %i[ create ]
 
   def index
-    @categories = Category.order(position: :asc).all
+    @categories = Category.where(parent_id: nil).all
   end
 
   def new
@@ -19,7 +18,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.create(category_params)
-    @category.update(code: @code)
     
     if @category.errors.any?
       redirect_to new_category_path, notice: @category.errors.first.full_message
@@ -47,20 +45,11 @@ class CategoriesController < ApplicationController
   end
 
   private
-    def set_code
-      if Category.all.count == 0
-        @code = 1
-      else
-        last_code = Category.last.code
-        @code = last_code.to_i + 1
-      end
-    end
-
     def set_category
       @category = Category.find(params[:id])
     end
 
     def category_params
-      params.require(:category).permit(:name, :position)
+      params.require(:category).permit(:name, :position, :parent_id)
     end    
 end
