@@ -15,8 +15,10 @@
   <div class="columns is-justify-content-center">
     <div class="column is-one-quarter">
        <% @categories.each do |category| %>
-        <%= render(MainCategoryComponent.new(category: category)) %>
-        <%= render(SecondCategoryComponent.new(category: category)) if category.subcategories.present? %>
+        <div data-controller="category">
+          <%= render(MainCategoryComponent.new(category: category)) %>
+          <%= render(SecondCategoryComponent.new(category: category)) if category.subcategories.present? %>
+        </div>
        <% end %>
     </div>
   </div>
