@@ -13,8 +13,7 @@
   </div>
 
   <div class="columns is-justify-content-center">
-    <div class="column is-one-quarter">
-      <div data-controller="drag" data-drag-url="/categories/:id/move">
+    <div class="column is-one-quarter" data-controller="drag" data-drag-url="/categories/:id/move">
         <% @categories.each do |category| %>
           <div data-id="<%= category.id %>" data-controller="category">
             <%= render(MainCategoryComponent.new(category: category)) %>
@@ -25,7 +24,6 @@
             <% end %>
           </div>
         <% end %>
-      </div>
     </div>
   </div>
 </div>
