@@ -17,7 +17,11 @@
        <% @categories.each do |category| %>
         <div data-controller="category">
           <%= render(MainCategoryComponent.new(category: category)) %>
-          <%= render(SecondCategoryComponent.new(category: category)) if category.subcategories.present? %>
+          <% if category.subcategories.present? %>
+            <div class="category_childs_none" data-category-target="childs">
+              <%= render(SecondCategoryComponent.new(category: category)) %>
+            </div>
+          <% end %>
         </div>
        <% end %>
     </div>
