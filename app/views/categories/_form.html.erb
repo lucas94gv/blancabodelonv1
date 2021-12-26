@@ -36,9 +36,6 @@
         <div class="field">
           <%= form.text_field :name, class: "input is-normal", placeholder: "Nombre", required: true %>
         </div>
-        <div class="field">
-          <%= form.number_field :position, class: "input is-normal", placeholder: "Posición" %>
-        </div>
         <%= form.hidden_field :parent_id, class: "input is-normal", value: params[:cat_father].present? ? params[:cat_father] : nil %>
       </div>
     </div>
