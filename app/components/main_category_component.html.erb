@@ -1,10 +1,13 @@
 <div class="columns">
     <div class="column box has-background-light mb-5">
         <div class="columns">
-            <div class="column">
+            <div class="column is-1">
+                <%= image_tag("icons/hand-move.svg", size: "20x20", class: "handle") %>
+            </div>
+            <div class="column is-9">
                 <span class="is-size-4"><%= @category.name %></span>
             </div>
-            <div class="column has-text-right">
+            <div class="column has-text-right is-2">
                 <%= image_tag("icons/arrow-down.svg", size: "20x20", data: { action: "click->category#open_subcategories",
                                                                              target: "category.main_category" }) if @category.subcategories.present? %>
                 <%= link_to image_tag("icons/icon-new.svg", size: "20x20"), new_category_path(cat_father: @category.id) %>

@@ -3,10 +3,10 @@ class CategoriesController < ApplicationController
   layout 'panel_admin'
 
   before_action :authenticate_user!
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show edit update destroy move ]
 
   def index
-    @categories = Category.where(parent_id: nil).all
+    @categories = Category.where(parent_id: nil).order(position: :asc).all
   end
 
   def new
@@ -42,6 +42,11 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url, notice: "La categoría se eliminó correctamente." }
       format.json { head :no_content }
     end
+  end
+
+  def move
+    @category.insert_at(params[:position].to_i)
+    head :ok
   end
 
   private

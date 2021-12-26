@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem 'acts_as_list', '~> 1.0', '>= 1.0.4'
+
 gem 'view_component'
 
 gem 'whenever', '~> 1.0'
