@@ -20,9 +20,11 @@ class CategoriesController < ApplicationController
     @category = Category.create(category_params)
     
     if @category.errors.any?
-      redirect_to new_category_path, notice: @category.errors.first.full_message
+      redirect_to new_category_path
+      flash[:error] = @category.errors.first.message
     else
-      redirect_to categories_path, notice: "La categoría se creó correctamente."  
+      redirect_to categories_path
+      flash[:success] = "La categoría se creó correctamente"
     end    
   end
 
@@ -30,18 +32,18 @@ class CategoriesController < ApplicationController
     @category.update(category_params)
 
     if @category.errors.any?
-      redirect_to edit_category_path, errors: @category.errors.first.full_message
+      redirect_to edit_category_path
+      flash[:error] = @category.errors.first.full_message
     else
       redirect_to categories_path, notice: "La categoría se actualizó correctamente."  
+      flash[:success] = "La categoría se actualizó correctamente"
     end
   end
 
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "La categoría se eliminó correctamente." }
-      format.json { head :no_content }
-    end
+    redirect_to categories_path
+    flash[:success] = "La categoría se eliminó correctamente"
   end
 
   def move

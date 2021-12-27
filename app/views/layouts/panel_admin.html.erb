@@ -11,12 +11,15 @@
 
   <body class="maxWidthHeight">
     <div class="columns por100WidthHeight">
-        <div class="column is-1 panel_admin has-background-success-dark">
-            <%= render 'layouts/admin/menu' %>
-        </div>
-        <div class="column is-11">
-            <%= yield %>
-        </div>
+      <div id="notifications" class="notifications">
+        <%= render(NotificationComponent.with_collection(flash.to_a)) %>
+      </div>
+      <div class="column is-1 panel_admin has-background-success-dark">
+          <%= render 'layouts/admin/menu' %>
+      </div>
+      <div class="column is-11">
+          <%= yield %>
+      </div>
     </div>
   </body>
 </html>

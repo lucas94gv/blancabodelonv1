@@ -15,21 +15,7 @@
           <%= link_to 'Volver', :back, class: "button" %>          
           <%= form.submit "Guardar", class: "button is-success" %>
       </div>
-    </div>
-    
-    <% if category.errors.any? %>
-      <div class="columns">
-        <div class="column">
-          <div id="error_explanation">
-            <ul>
-              <% category.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    <% end %>      
+    </div>   
 
     <div class="columns is-justify-content-center box has-background-light">
       <div class="column is-half">

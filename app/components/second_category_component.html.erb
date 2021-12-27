@@ -1,9 +1,9 @@
-<div class="columns level-right is-multiline" data-controller="drag" data-drag-url="/categories/:id/move">
+<div class="columns level-right is-multiline">
     <% @category.subcategories.each do |cat_child| %>
-        <div class="column box has-background-light mb-5 is-11" data-id="<%= cat_child.id %>">
+        <div class="column box has-background-light mb-5 is-11">
             <div class="columns">
                 <div class="column">
-                    <%= image_tag("icons/hand-move.svg", size: "20x20", class: "handle") %>
+                    <%#= image_tag("icons/hand-move.svg", size: "20x20", class: "handle") %>
                     <span class="is-size-5"><%= cat_child.name %></span>
                 </div>
                 <div class="column has-text-right">
