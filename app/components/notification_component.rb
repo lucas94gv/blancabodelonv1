@@ -9,13 +9,13 @@ class NotificationComponent < ViewComponent::Base
   def icon
     case type
     when 'success'
-      inline_svg_tag("success.svg", class: "notifications__item-icon has-text-success")
+      inline_svg_tag("icons/success.svg", class: "notifications__item-icon has-text-success")
     when 'notice'
       inline_svg_tag("info.svg", class: "notifications__item-icon has-text-info")
     when 'alert'
       inline_svg_tag("alert.svg", class: "notifications__item-icon has-text-warning")
     when 'error'
-      inline_svg_tag("error.svg", class: "notifications__item-icon has-text-danger")
+      inline_svg_tag("icons/error.svg", class: "notifications__item-icon has-text-danger")
     end
   end
 
