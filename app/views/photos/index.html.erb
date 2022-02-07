@@ -1,0 +1,12 @@
+<h1>Photos</h1>
+
+<%= link_to 'Add Photo', new_photo_path %>
+
+<% @photos.each do |photo| %>
+    <div>
+    <% if photo.image_data? %>
+        <%= image_tag photo.image_url %>
+    <% end %>
+    <p><%= photo.title %> | <%= link_to 'Edit', edit_photo_path(photo) %></p>
+    </div>
+<% end %>

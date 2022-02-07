@@ -1,0 +1,23 @@
+require "test_helper"
+
+class PhotosControllerTest < ActionDispatch::IntegrationTest
+  test "should get index" do
+    get photos_index_url
+    assert_response :success
+  end
+
+  test "should get new" do
+    get photos_new_url
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get photos_edit_url
+    assert_response :success
+  end
+
+  test "should get form" do
+    get photos_form_url
+    assert_response :success
+  end
+end
