@@ -1,15 +1,42 @@
-<%= form_for @photo do |f| %>
+<div class="container">
+  <div class="columns">
+    <div class="column has-text-centered has-text-weight-bold">
+      <% if @photo.new_record? %>
+        <span class="is-size-1">Nueva imagen</span>
+      <% else %>
+        <span class="is-size-1">Editar <%= @photo.title %></span>
+      <% end %>      
+    </div>
+  </div>
+</div>
+
+<%= form_with(model: photo) do |f| %>
   <%#= render "shared/errors", object: @photo %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <div class="columns">
+    <div class="column column has-text-right">
+        <%= link_to 'Volver', :back, class: "button" %>          
+        <%= f.submit "Guardar", class: "button is-success" %>
+    </div>
+  </div>  
 
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-
-  <% if @photo.image_data? %>
-    Remove attachment: <%= f.check_box :remove_image %>
-  <% end %>
-
-  <%= f.submit %>
+  <div class="columns is-justify-content-center box has-background-light">
+    <div class="column is-half">
+      <div class="field">
+        <%= f.text_field :title, class: "input is-normal", placeholder: "Título", required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :image, "Imagen" %>
+        <%= f.file_field :image %>        
+      </div>
+       <% if @photo.image_data? %>
+        <div>
+          <%= image_tag photo.image_url(:medium) %>
+        </div>
+        <div>
+          Eliminar imagen: <%= f.check_box :remove_image %>
+        </div>
+       <% end %>
+    </div>
+  </div>
 <% end %>

@@ -1,12 +1,30 @@
-<h1>Photos</h1>
+<div clas="container">
 
-<%= link_to 'Add Photo', new_photo_path %>
-
-<% @photos.each do |photo| %>
-    <div>
-    <% if photo.image_data? %>
-        <%= image_tag photo.image_url(:small) %>
-    <% end %>
-    <p><%= photo.title %> | <%= link_to 'Edit', edit_photo_path(photo) %></p>
+  <div class="columns">
+    <div class="column has-text-centered has-text-weight-bold">
+      <span class="is-size-1">MULTIMEDIA</span>
     </div>
-<% end %>
+  </div>  
+
+  <div class="columns is-justify-content-center">
+    <div class="column is-one-quarter has-text-centered">
+      <%= link_to 'Nueva imagen', new_photo_path, class: "button is-success" %>
+    </div>
+  </div>
+
+  <div class="columns is-justify-content-center">
+    <div class="column is-full has-text-centered">
+        <% @photos.each do |photo| %>
+            <div style="width: 33.3%; float: left; margin-bottom: 20px;">
+                <% if photo.image_data? %>
+                    <%= image_tag photo.image_url(:medium) %>
+                    <div>
+                        <div class="mb-3"><span class="has-text-weight-bold"><%= photo.title %></span></div>
+                        <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_photo_path(photo) %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+  </div>
+</div>
