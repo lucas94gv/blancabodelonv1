@@ -2,7 +2,8 @@ class PhotosController < ApplicationController
 
   layout 'panel_admin'
 
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
+  before_action :set_photo, only: %i[ edit update destroy ]
 
   def index
     @photos = Photo.all
@@ -17,27 +18,40 @@ class PhotosController < ApplicationController
   end
 
   def create
-      @photo = Photo.new(photo_params)
-      if @photo.save
-          flash[:success] = 'Photo added!'
-          redirect_to photos_path
+      @photo = Photo.create(photo_params)
+      if @photo.errors.any?
+        redirect_to new_photo_path
+        flash[:error] = @photo.errors.first.full_message
       else
-          render 'new'
+        redirect_to photos_path 
+        flash[:success] = "La imagen se ha subido correctamente."
       end
   end
 
   def update
-    @photo = Photo.find(params[:id])
-    if @photo.update_attributes(photo_params)
-      flash[:success] = 'Photo edited!'
-      redirect_to photos_path
+    @photo.update(photo_params)
+
+    if @photo.errors.any?
+      redirect_to edit_photo_path
+      flash[:error] = @photo.errors.first.full_message
     else
-      render 'edit'
+      redirect_to photos_path, notice: "La imagen se actualizó correctamente."  
+      flash[:success] = "La imagen se actualizó correctamente"
     end
   end
 
+  def destroy
+    @photo.destroy
+    redirect_to photos_path
+    flash[:success] = "La imagen se eliminó correctamente"
+  end
+
   private
+    def set_photo
+      @photo = Photo.find(params[:id])
+    end
+
     def photo_params
-        params.require(:photo).permit(:title, :image, :remove_image)
+        params.require(:photo).permit(:title, :image)
     end
 end

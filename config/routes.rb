@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :photos, only: [:new, :create, :index, :edit, :update]
+  resources :photos, only: [:new, :create, :index, :edit, :update, :destroy]
   
   resources :categories do
     member do

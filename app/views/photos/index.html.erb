@@ -21,6 +21,7 @@
                     <div>
                         <div class="mb-3"><span class="has-text-weight-bold"><%= photo.title %></span></div>
                         <%= link_to image_tag("icons/icon-edit.svg", size: "20x20"), edit_photo_path(photo) %>
+                        <%= link_to image_tag("icons/icon-delete.svg", size: "20x20"), photo, method: :delete, data: { confirm: '¿Estás seguro?' } %>
                     </div>
                 <% end %>
             </div>
